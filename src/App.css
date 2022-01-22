@@ -1,38 +1,408 @@
-.App {
-  text-align: center;
+* {
+    font-family: 'Montserrat', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Title */
+
+h1 {
+    font-family: 'Fredericka the Great', cursive;
+    line-height: 1.5;
+    font-size: 4rem;
+    margin: 3rem 0;
+}
+#title p {
+    font-size: 1.3rem;
+}
+.search-form {
+    position: relative;
+    max-width: 600px;
+    margin: 3rem auto 0;
+}
+.search-form input {
+    width: 100%;
+    padding: 1rem 2rem;
+    border: none;
+}
+.search-form button {
+    position: absolute;
+    top: 0.2rem;
+    right: 0.2rem;
+    font-size: 1rem;
+    padding: 0.8rem 1.1rem;
+    background-color: #FEA82F;
+    border: none;
+}
+.search-form button:hover {
+    background-color: #FFC288;
+} 
+.container-fluid {
+    padding: 1% 15%;
+    background-color: #FCECDD;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Navigation Bar */
+.navbar {
+    padding: 0;
+}
+.navbar-brand {
+    font-family: 'Pacifico', sans-serif;
+    font-size: 2rem;
+}
+.nav-item {
+    padding-left: 1rem;
+}
+.nav-link {
+    font-size: 1.2rem;
+    color: #000;
+}
+.nav-link.active,
+.nav-link:hover {
+    color: #FEA82F !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Pets Image Section */
+#pets {
+    background-color:#FCECDD ;
+    text-align: center;
+}
+.pets-image {
+    /* max-width: 1024px; */
+    margin-bottom: -55px;
 }
 
-.App-link {
-  color: #61dafb;
+/* Feature Section */
+#features {
+    padding: 7% 10%;
+    background-color: #fff;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#features h2 {
+    font-size: 1.5rem;
+}
+
+#features ul {
+    padding: 1rem;
+}
+#features li {
+    margin: 0.5rem;
+}
+#features li:hover {
+    color: #FEA82F;
+}
+.feature-box {
+    text-align: center;
+    padding: 5%;
+}
+.circle {
+    background-color: #FCECDD;
+    width: 15rem;
+    height: 15rem;
+    border-radius: 100%;
+    margin: 0 auto;
+}
+.circle:hover {
+    background-color: #FEA82F;
+    color: #fff;
+    cursor: pointer;
+}
+.icon {
+    margin: 2.5rem 0 1.5rem;
+}
+.feature-dropdown,
+.feature-dropdown:focus {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+.circle:hover .feature-dropdown {
+    color: #fff !important;
+}
+
+/* Testimonial Section */
+
+#testimonials {
+    text-align: center;
+    background-color: #FCECDD;
+}
+.testimonial-image {
+    width: 10%;
+    border-radius: 100%;
+    margin: 20px;
+}
+.testimonial-item {
+    padding: 7% 15%;
+}
+
+/* Footer Section*/
+
+#footer {
+    padding: 3% 15% 2%;
+    text-align: center;
+}
+.social-icon {
+    margin: 20px 10px;
+    color: #000;
+}
+.social-icon:hover {
+    color: #FEA82F;
+}
+
+/* Top button */
+#top-button {
+    display: none; 
+    position: fixed; 
+    bottom: 2rem; 
+    right: 2rem; 
+    color: white; 
+    font-size: 1rem;
+    padding: 0.8rem 1.1rem;
+    background-color: #FEA82F;
+    border: none;
+    z-index: 99;
+}
+#top-button:hover {
+    background-color: #FFC288;
+}
+
+/* Pet Finder Page */
+
+/* PF Search Section */
+#pf-search-category,
+#pf-search-distance {
+    flex: none;
+    width: max-content;
+}
+
+/* PF Search Result */
+#pf-search-result {
+    padding: 3% 15%;
+    text-align: center;
+}
+.pf-search-column {
+    padding: 3% 2%;
+}
+.animal-card {
+    cursor: pointer;
+}
+.animal-card:hover {
+    box-shadow: 0 0 15px 5px #fea82f;
+}
+.card-media {
+    position: relative;
+    background-color: #ddd;
+}
+.card-media:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+.card-img {
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+}
+
+/* Detailed Animal Info */
+.photo-item {
+    padding: 0 15%;
+    max-height: 85vh;
+}
+.modal-body h2 {
+    font-weight: bold;
+}
+.modal-body h4 {
+    font-weight: bold;
+    font-size: 1rem;
+}
+.animal-details {
+    padding: 2% 15%;
+}
+
+/* Loading Overlay */
+.loading {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+}
+.loading .spinner-border {
+    margin: 0 auto;
+}
+
+/* Contact Form Page */
+#contacts {
+    padding: 5% 15% 1%;
+}
+.contact-image {
+    position: relative;
+}
+.contact-image img {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+.contact-form {
+    background-color: #FCECDD;
+}
+.contact-form h1 {
+    margin: 1rem 0;
+    font-size: 3rem;
+}
+
+.contact-form,
+.contact-form input,
+.contact-form textarea,
+.contact-form button {
+    border-radius: 2rem;
+    padding: 1rem 2rem;
+    border: none;
+}
+.contact-form textarea {
+    min-height: 169px;
+}
+.contact-form button {
+    background-color: #FEA82F;
+    color: #fff;
+}
+.contact-form button:hover {
+    background-color: #FFC288;
+    color: #fff;
+} 
+
+/* Confirmation Window */
+.modal-confirm h4 {
+    /* text-align: center; */
+    font-size: 26px;
+    margin: 30px 0 -15px;
+}
+.modal-confirm .modal-content {
+    padding: 20px;
+    /* border-radius: 5px; */
+    border: none;
+}
+.modal-confirm .modal-header {
+    border: none;
+    position: relative;
+}
+.modal-confirm .icon-box {
+    color: #fff;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: -70px;
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    background: #82ce34;
+    padding: 1rem;
+    text-align: center;
+}
+.modal-confirm .modal-footer {
+    border: none;
+    display: block;
+}
+.modal-confirm button {
+    background: #82ce34;
+    border: none;
+}
+
+/* Large: Large screens. */
+@media screen and (orientation: landscape) and (min-width: 992px) and (max-width: 1191px) {
+    .pets-image {
+        max-width: 990px;
+        margin-bottom: -52px;
+    }
+}
+
+/* Medium: Small screens, laptops. */
+@media screen and (orientation: landscape) and (min-width: 768px) and (max-width: 991px) {
+    h1 {
+        font-size: 3.5rem;
+    }
+    .pets-image {
+        max-width: 750px;
+        margin-bottom: -40px;
+    }
+    .contact-image {
+        display: none;
+    }
+}
+
+/* Small: iPads, Tablets */
+/* X-Small: Mobile devices */
+@media screen and (orientation: landscape) and (max-width: 767px) {
+    h1 {
+        font-size: 3rem;
+    }
+    .search-form {
+        margin: 3rem auto;
+    }
+    .container-fluid {
+        padding: 1% 5%;
+    }
+    #title p {
+        font-size: 1rem;
+    }
+    #pets,
+    .contact-image {
+        display: none;
+    }
+    #testimonials h2 {
+        font-size: 1.5rem;
+    }
+    .nav-link,
+    li.search-item {
+        font-size: 1.5rem;
+    }
+    #pf-search-result {
+        padding: 3% 5%;
+    }
+    #contacts {
+        padding: 5% 5%;
+    }
+    #contacts h1 {
+        font-size: 2.5rem;
+    }
+}
+
+
+@media screen and (orientation: portrait) and (max-width: 991px) {
+    h1 {
+        font-size: 3rem;
+    }
+    .search-form {
+        margin: 3rem auto;
+    }
+    .container-fluid {
+        padding: 1% 5%;
+    }
+    #title p {
+        font-size: 1rem;
+    }
+    #pets,
+    .contact-image {
+        display: none;
+    }
+    #testimonials h2 {
+        font-size: 1.5rem;
+    }
+    .nav-link,
+    li.search-item {
+        font-size: 1.5rem;
+    }
+    #pf-search-result {
+        padding: 3% 5%;
+    }
+    #contacts {
+        padding: 5% 5%;
+    }
+    #contacts h1 {
+        font-size: 2.5rem;
+    }
 }
