@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
@@ -7,13 +6,16 @@ import Home from './components/Home';
 import TopButton from './components/TopButton';
 
 function App() {
+
+
+
   return (
     <BrowserRouter>
       <div className="App">
         <Header />
         <Routes>
-          <Route path='/' element={<Home />}/>
-          <Route path='home' element={<Home />}/>
+          <Route path='/' element={<Home />} />
+          <Route path='home' element={<Home />} />
           {/* <Route path='petfinder' element={ }/> */}
           {/* <Route path='contact' element={ }/> */}
           {/* <Route path='*' element={ }/> */}
