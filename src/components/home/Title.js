@@ -53,8 +53,7 @@ function Title() {
                         <div className='title-heading mt-5 pt-4'>
                             <h1>There's a pet near you that needs some love</h1>
                             <p className='text-muted'>Find pets in and around your area that need a new home. Enter in some details,
-                                press search, and start a
-                                new chapter in your life.</p>
+                                press search, and start a new chapter in your life.</p>
                             <div className='text-center search-form'>
                                 <FormControl
                                     type='text'
