@@ -1,11 +1,15 @@
 import axios from 'axios';
 
-const baseURL = 'http://';
+const baseURL = 'https://www.petfinder.com/v2/';
 
 function getAxios(endPoint) {
     return axios.get(baseURL + endPoint)
         .then(response => response.data)
-        .catch(error => console.error(error))
+        .catch(error => console.error(error));
+}
+
+export function getLocations(query, latitude, longitude) {
+    return getAxios(`geography/search/?q=${query}&lat=${latitude}&lng=${longitude}`);
 }
 
 

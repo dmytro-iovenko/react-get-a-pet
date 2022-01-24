@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { Button, Col, Container, FormControl, FormSelect, InputGroup, Row } from "react-bootstrap";
+import { PetFinderContext } from '../../contexts/PetFinderContext';
 
 function SearchBar() {
+    const { setSearchLocation, searchParameters, suggestions } = useContext(PetFinderContext);
     return (
         <section id="pf-search">
 
@@ -33,10 +36,15 @@ function SearchBar() {
                                 id='pf-search-location'
                                 placeholder='Enter City, State or ZIP'
                                 autoComplete='off'
-                                // onChange={setSearchLocation}
-                                // value={searchParameters.location}
+                                onChange={setSearchLocation}
+                                value={searchParameters.location}
                             />
-                            <datalist id="locationOptions"></datalist>
+                            <datalist id="locationOptions">
+                                {suggestions.map(
+                                    // prevent displaying a suggestion if it equals to the input value
+                                    (option, index) => option.display_name !== searchParameters.location && <option value={option.display_name} key={index} />
+                                )}
+                            </datalist>
                             <Button variant='outline-secondary' id='pf-search-btn'>
                                 Search
                             </Button>

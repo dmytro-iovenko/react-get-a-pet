@@ -1,49 +1,9 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { Button, Col, Container, FormControl, Row } from 'react-bootstrap';
+import { PetFinderContext } from '../../contexts/PetFinderContext';
 
 function Title() {
-
-    const [userLocation, setUserLocation] = useState();
-    const [searchParameters, setSearchParameters] = useState({
-        location: '',
-        distance: 100,
-        type: ''
-    });
-    const [suggestions, setSuggestions] = useState([]);
-
-    // update search location using controlled input
-    const setSearchLocation = (event) => {
-        setSearchParameters((prevState) => ({
-            ...prevState,
-            location: event.target.value
-        }));
-    }
-
-    // get the list of location suggestions for user input
-    useEffect(() => {
-        // get suggestions when input more than 2 characters
-        searchParameters.location.length > 2
-            // fetch request to get allowed locations from PetFinder.com
-            && axios.get(`https://www.petfinder.com/v2/geography/search/?q=${searchParameters.location}&lat=${userLocation.latitude}&lng=${userLocation.longitude}`)
-                .then((response) => setSuggestions(response.data.locations))
-    }, [searchParameters.location]);
-
-    // define function in global scope to use outside React application:
-    // https://stackoverflow.com/questions/55040641/call-react-component-function-from-javascript
-    window.getUserLocation = (obj) => {
-        setUserLocation(obj)
-    };
-
-    // append an external Geolocation Onetrust Script to the component:
-    // https://betterprogramming.pub/4-ways-of-adding-external-js-files-in-reactjs-823f85de3668
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.src = 'https://geolocation.onetrust.com/cookieconsentpub/v1/geo/location/getUserLocation';
-        script.async = true;
-        document.body.appendChild(script);
-        return (() => document.body.removeChild(script));
-    }, []);
+    const { setSearchLocation, searchParameters, suggestions } = useContext(PetFinderContext);
 
     return (
         <section id='title'>
