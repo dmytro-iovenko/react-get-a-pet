@@ -1,5 +1,5 @@
-import { createContext, useEffect, useState } from "react";
-import { getLocations } from "../services/petfinder-api";
+import { createContext, useEffect, useState } from 'react';
+import { getLocations, getAccessToken, getAnimals } from '../services/petfinder-api';
 
 export const PetFinderContext = createContext();
 
@@ -11,6 +11,35 @@ export function PetFinderProvider(props) {
         type: ''
     });
     const [suggestions, setSuggestions] = useState([]);
+
+
+    const [token, setToken] = useState();
+    const [isSearchStarted, setIsSearchStarted] = useState(false);
+    const [searchResults, setSearchResults] = useState();
+
+    useEffect(() => {
+
+        const params = Object.fromEntries(Object.entries(searchParameters).filter(([_, v]) => v !== null && v !== ''));
+
+
+        if (isSearchStarted) {
+            if (token && token.expires_in > Date.now()) {
+                getAnimals(token.access_token, 'animals', params)
+                    .then(data=> setSearchResults(data));
+            } else {
+                // get an access token asynchronously
+                getAccessToken()
+                    // update 'expires_in' value to the relevant timestamp
+                    .then(data => ({ ...data, expires_in: Date.now() + data.expires_in * 1000 }))
+                    .then(data => setToken((prev)=>({...prev, ...data})))
+            }
+        }
+    }, [isSearchStarted, token])
+
+    const startSearch = () => {
+        setIsSearchStarted(true);
+    }
+
 
     // update search location using controlled input
     const setSearchLocation = (event) => {
@@ -28,7 +57,7 @@ export function PetFinderProvider(props) {
             && getLocations(searchParameters.location, userLocation.latitude, userLocation.longitude)
                 // put 'locations' array from response data to 'suggestions' State
                 .then(data => setSuggestions(data.locations))
-    }, [searchParameters.location, userLocation.latitude, userLocation.longitude]);
+    }, [searchParameters.location]);
 
     // define function in global scope to use outside React application:
     // https://stackoverflow.com/questions/55040641/call-react-component-function-from-javascript
@@ -47,7 +76,7 @@ export function PetFinderProvider(props) {
     }, []);
 
     return (
-        <PetFinderContext.Provider value={{ setSearchLocation, searchParameters, suggestions }}>
+        <PetFinderContext.Provider value={{ setSearchLocation, searchParameters, suggestions, searchResults, startSearch }}>
             {props.children}
         </PetFinderContext.Provider>
     );

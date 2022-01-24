@@ -1,34 +1,34 @@
-import { useContext } from "react";
-import { Button, Col, Container, FormControl, FormSelect, InputGroup, Row } from "react-bootstrap";
+import { useContext } from 'react';
+import { Button, Col, Container, FormControl, FormSelect, InputGroup, Row } from 'react-bootstrap';
 import { PetFinderContext } from '../../contexts/PetFinderContext';
 
 function SearchBar() {
-    const { setSearchLocation, searchParameters, suggestions } = useContext(PetFinderContext);
+    const { setSearchLocation, searchParameters, suggestions, startSearch } = useContext(PetFinderContext);
     return (
-        <section id="pf-search">
+        <section id='pf-search'>
 
             <Container fluid>
                 <Row>
                     <Col>
-                        <InputGroup className="mt-5 pt-5">
-                            <FormSelect id="pf-search-category">
-                                <option value="" selected>Category...</option>
-                                <option value="dog">Dogs</option>
-                                <option value="cat">Cats</option>
-                                <option value="rabbit">Rabbits</option>
-                                <option value="small-furry">Small & Furry</option>
-                                <option value="horse">Horses</option>
-                                <option value="bird">Birds</option>
-                                <option value="scales-fins-other">Scales, Fins, & Other</option>
-                                <option value="barnyard">Barnyard</option>
+                        <InputGroup className='mt-5 pt-5'>
+                            <FormSelect id='pf-search-category' defaultValue={''}>
+                                <option value=''>Category...</option>
+                                <option value='dog'>Dogs</option>
+                                <option value='cat'>Cats</option>
+                                <option value='rabbit'>Rabbits</option>
+                                <option value='small-furry'>Small & Furry</option>
+                                <option value='horse'>Horses</option>
+                                <option value='bird'>Birds</option>
+                                <option value='scales-fins-other'>Scales, Fins, & Other</option>
+                                <option value='barnyard'>Barnyard</option>
                             </FormSelect>
-                            <FormSelect id="pf-search-distance">
-                                <option value="" selected>Distance...</option>
-                                <option value="10">10 miles</option>
-                                <option value="25">25 miles</option>
-                                <option value="50">50 miles</option>
-                                <option value="100">100 miles</option>
-                                <option value="500">Anywhere</option>
+                            <FormSelect id='pf-search-distance' defaultValue={''}>
+                                <option value=''>Distance...</option>
+                                <option value='10'>10 miles</option>
+                                <option value='25'>25 miles</option>
+                                <option value='50'>50 miles</option>
+                                <option value='100'>100 miles</option>
+                                <option value='500'>Anywhere</option>
                             </FormSelect>
                             <FormControl
                                 type='text'
@@ -39,13 +39,13 @@ function SearchBar() {
                                 onChange={setSearchLocation}
                                 value={searchParameters.location}
                             />
-                            <datalist id="locationOptions">
+                            <datalist id='locationOptions'>
                                 {suggestions.map(
                                     // prevent displaying a suggestion if it equals to the input value
                                     (option, index) => option.display_name !== searchParameters.location && <option value={option.display_name} key={index} />
                                 )}
                             </datalist>
-                            <Button variant='outline-secondary' id='pf-search-btn'>
+                            <Button variant='outline-secondary' id='pf-search-btn' onClick={startSearch}>
                                 Search
                             </Button>
                         </InputGroup>
