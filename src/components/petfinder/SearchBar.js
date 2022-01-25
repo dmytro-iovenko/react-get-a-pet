@@ -3,7 +3,8 @@ import { Button, Col, Container, FormControl, FormSelect, InputGroup, Row } from
 import { PetFinderContext } from '../../contexts/PetFinderContext';
 
 function SearchBar() {
-    const { setSearchLocation, searchParameters, suggestions, startSearch } = useContext(PetFinderContext);
+    const { searchParameters, updateSearchParameters, suggestions, startSearch } = useContext(PetFinderContext);
+
     return (
         <section id='pf-search'>
 
@@ -11,7 +12,11 @@ function SearchBar() {
                 <Row>
                     <Col>
                         <InputGroup className='mt-5 pt-5'>
-                            <FormSelect id='pf-search-category' defaultValue={''}>
+                            <FormSelect 
+                                id='type' 
+                                onChange={updateSearchParameters}
+                                defaultValue={searchParameters.type}
+                            >
                                 <option value=''>Category...</option>
                                 <option value='dog'>Dogs</option>
                                 <option value='cat'>Cats</option>
@@ -22,7 +27,11 @@ function SearchBar() {
                                 <option value='scales-fins-other'>Scales, Fins, & Other</option>
                                 <option value='barnyard'>Barnyard</option>
                             </FormSelect>
-                            <FormSelect id='pf-search-distance' defaultValue={''}>
+                            <FormSelect 
+                                id='distance'
+                                onChange={updateSearchParameters}
+                                defaultValue={searchParameters.distance}
+                            >
                                 <option value=''>Distance...</option>
                                 <option value='10'>10 miles</option>
                                 <option value='25'>25 miles</option>
@@ -33,10 +42,10 @@ function SearchBar() {
                             <FormControl
                                 type='text'
                                 list='locationOptions'
-                                id='pf-search-location'
+                                id='location'
                                 placeholder='Enter City, State or ZIP'
                                 autoComplete='off'
-                                onChange={setSearchLocation}
+                                onChange={updateSearchParameters}
                                 value={searchParameters.location}
                             />
                             <datalist id='locationOptions'>

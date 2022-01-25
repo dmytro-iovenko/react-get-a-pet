@@ -1,5 +1,5 @@
 import Loading from "./petfinder/Loading";
-import PetInfo from "./petfinder/PetInfo";
+import AnimalInfo from "./petfinder/AnimalInfo";
 import SearchBar from "./petfinder/SearchBar";
 import SearchResult from "./petfinder/SearchResult";
 
@@ -8,7 +8,7 @@ function PetFinder() {
         <>
             <SearchBar />
             <SearchResult />
-            <PetInfo />
+            <AnimalInfo />
             <Loading />
         </>
     );

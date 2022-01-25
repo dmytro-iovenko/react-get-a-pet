@@ -7,11 +7,10 @@ export function PetFinderProvider(props) {
     const [userLocation, setUserLocation] = useState();
     const [searchParameters, setSearchParameters] = useState({
         location: '',
-        distance: 100,
+        distance: '',
         type: ''
     });
     const [suggestions, setSuggestions] = useState([]);
-
 
     const [token, setToken] = useState();
     const [isSearchStarted, setIsSearchStarted] = useState(false);
@@ -19,19 +18,20 @@ export function PetFinderProvider(props) {
 
     useEffect(() => {
 
-        const params = Object.fromEntries(Object.entries(searchParameters).filter(([_, v]) => v !== null && v !== ''));
-
+        const params = Object.fromEntries(Object.entries(searchParameters).filter(([_, v]) => v && v !== ''));
+        const defaultLocation = (userLocation && 'city' in userLocation && 'state' in userLocation) ? { location: userLocation.city + ', ' + userLocation.state } : {};
 
         if (isSearchStarted) {
             if (token && token.expires_in > Date.now()) {
-                getAnimals(token.access_token, 'animals', params)
-                    .then(data=> setSearchResults(data));
+                getAnimals(token.access_token, 'animals', {...defaultLocation, ...params})
+                    .then(data => setSearchResults(data))
+                    .finally(() => setIsSearchStarted(false));
             } else {
                 // get an access token asynchronously
                 getAccessToken()
                     // update 'expires_in' value to the relevant timestamp
                     .then(data => ({ ...data, expires_in: Date.now() + data.expires_in * 1000 }))
-                    .then(data => setToken((prev)=>({...prev, ...data})))
+                    .then(data => setToken((prev) => ({ ...prev, ...data })))
             }
         }
     }, [isSearchStarted, token])
@@ -41,11 +41,11 @@ export function PetFinderProvider(props) {
     }
 
 
-    // update search location using controlled input
-    const setSearchLocation = (event) => {
+    // update search parameters using controlled input
+    const updateSearchParameters = (event) => {
         setSearchParameters((prevState) => ({
             ...prevState,
-            location: event.target.value
+            [event.target.id]: event.target.value
         }));
     }
 
@@ -75,8 +75,19 @@ export function PetFinderProvider(props) {
         return (() => document.body.removeChild(script));
     }, []);
 
+
+    const [animalInfo, setAnimalInfo] = useState();
+
+    const showAnimalInfo = (object) => {
+        setAnimalInfo(object);
+    }
+    const hideAnimalInfo = () => {
+        setAnimalInfo();
+    }
+
     return (
-        <PetFinderContext.Provider value={{ setSearchLocation, searchParameters, suggestions, searchResults, startSearch }}>
+        <PetFinderContext.Provider value={{ userLocation, searchParameters, updateSearchParameters, suggestions, searchResults, startSearch,
+         animalInfo, showAnimalInfo, hideAnimalInfo}}>
             {props.children}
         </PetFinderContext.Provider>
     );
