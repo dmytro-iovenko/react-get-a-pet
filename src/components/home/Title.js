@@ -3,7 +3,7 @@ import { Button, Col, Container, FormControl, Row } from 'react-bootstrap';
 import { PetFinderContext } from '../../contexts/PetFinderContext';
 
 function Title() {
-    const { setSearchLocation, searchParameters, suggestions } = useContext(PetFinderContext);
+    const { updateSearchParameters, searchParameters, suggestions } = useContext(PetFinderContext);
 
     return (
         <section id='title'>
@@ -22,7 +22,7 @@ function Title() {
                                     id='search-location'
                                     placeholder='Enter City, State or ZIP'
                                     autoComplete='off'
-                                    onChange={setSearchLocation}
+                                    onChange={updateSearchParameters}
                                     value={searchParameters.location}
                                 />
                                 <datalist id='locationOptions'>

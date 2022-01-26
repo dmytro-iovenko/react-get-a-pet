@@ -49,3 +49,14 @@ export function getAnimals(token, endPoint, params) {
         .then(response => response.data)
         .catch(error => console.error(error));
 }
+
+// function to get next page data from PetFinder.com
+export function getMoreAnimals(token, nextPageURL) {
+    const baseURL = 'https://api.petfinder.com';
+    const config = {
+        headers: { 'Authorization': `Bearer ${token}` }
+    }
+    return axios.get(baseURL + nextPageURL, config)
+    .then(response => response.data )
+    .catch(error => console.error(error));
+}

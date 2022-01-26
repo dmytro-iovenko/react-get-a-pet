@@ -22,8 +22,12 @@ function AnimalInfo() {
                                     <> &#65121; {Object.values(animalInfo.colors).filter(color => color !== null).join(', ')}</>
                                 }
                             </p>
-                            <h4>About</h4>
-                            <p>{animalInfo.description}</p>
+                            {animalInfo.description &&
+                                <>
+                                    <h4>About</h4>
+                                    <p>{animalInfo.description}</p>
+                                </>
+                            }
                             {animalInfo.tags.length > 0 &&
                                 <>
                                     <h4>Characteristics</h4>
