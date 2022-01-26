@@ -4,57 +4,86 @@ import { getLocations, getAccessToken, getAnimals, getMoreAnimals } from '../ser
 export const PetFinderContext = createContext();
 
 export function PetFinderProvider(props) {
+    // state to store default user location
     const [userLocation, setUserLocation] = useState();
+    // state to store search parameters
     const [searchParameters, setSearchParameters] = useState({
         location: '',
         distance: '',
         type: ''
     });
+    // state to store relevant location suggestions for user input
     const [suggestions, setSuggestions] = useState([]);
+    // state to store a token to access Petfinder API
     const [token, setToken] = useState();
+    // state to store search results
     const [searchResults, setSearchResults] = useState();
+    // state to store additional info about the selected animal
+    const [animalInfo, setAnimalInfo] = useState();
+    // state to indicate if search is started
     const [isSearchStarted, setIsSearchStarted] = useState(false);
+    // state to indicate if the next page data is loaded
     const [isGetNextPage, setIsGetNextPage] = useState(false);
 
+    // trigger search start
     const startSearch = () => {
         setIsSearchStarted(true);
     }
+    // use Effect Hook to get initial data from the server according to current search parameters
     useEffect(() => {
+        // trigger getting data if 'isSearchStarted' state is true
         if (isSearchStarted) {
+            // check if token exists and does not expire
             if (token && token.expires_in > Date.now()) {
+                // remove blank attributes from search parameters
+                // src: https://stackoverflow.com/a/38340730
                 const params = Object.fromEntries(Object.entries(searchParameters).filter(([_, v]) => v && v !== ''));
+                // initialize default location
                 const defaultLocation = (userLocation && 'city' in userLocation && 'state' in userLocation) ? { location: userLocation.city + ', ' + userLocation.state } : {};
 
+                // fetch data from server and store as search results
                 getAnimals(token.access_token, 'animals', { ...defaultLocation, ...params })
                     .then(data => setSearchResults(data))
+                    // reset 'isSearchStarted' state
                     .finally(() => setIsSearchStarted(false));
             } else {
+                // get an access token asynchronously
                 getAccessToken()
+                    // update 'expires_in' value to the relevant timestamp
                     .then(data => ({ ...data, expires_in: Date.now() + data.expires_in * 1000 }))
                     .then(data => setToken((prev) => ({ ...prev, ...data })))
             }
         }
     }, [isSearchStarted, token])
 
+    // trigger fetching next page data
     const getNextPage = () => {
         setIsGetNextPage(true);
     }
 
+    // use Effect Hook to get next page data from the server
     useEffect(() => {
-
+        // trigger getting data if 'isGetNextPage' state is true
         if (isGetNextPage) {
+            // check if token exists and does not expire
             if (token && token.expires_in > Date.now()) {
+                // fetch data from server and add it to search results
                 getMoreAnimals(token.access_token, searchResults.pagination._links.next.href)
                     .then(data => setSearchResults(prev => ({ ...prev, animals: [...prev.animals, ...data.animals], pagination: data.pagination })))
+                    // reset 'isGetNextPage' state
                     .finally(() => setIsGetNextPage(false));
             } else {
+                // get an access token asynchronously
                 getAccessToken()
+                    // update 'expires_in' value to the relevant timestamp
                     .then(data => ({ ...data, expires_in: Date.now() + data.expires_in * 1000 }))
                     .then(data => setToken((prev) => ({ ...prev, ...data })))
             }
         }
     }, [isGetNextPage, token])
 
+
+    // update search parameters using controlled input
     const updateSearchParameters = (event) => {
         setSearchParameters((prevState) => ({
             ...prevState,
@@ -88,12 +117,12 @@ export function PetFinderProvider(props) {
         return (() => document.body.removeChild(script));
     }, []);
 
-
-    const [animalInfo, setAnimalInfo] = useState();
-
+    // show the modal window with animal info
     const showAnimalInfo = (object) => {
         setAnimalInfo(object);
     }
+
+    // hide the modal window with animal info
     const hideAnimalInfo = () => {
         setAnimalInfo();
     }
