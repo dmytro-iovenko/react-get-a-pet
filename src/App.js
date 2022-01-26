@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import TopButton from './components/TopButton';
 import PetFinder from './components/PetFinder';
+import Contact from './components/Contact';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='home' element={<Home />} />
             <Route path='petfinder' element={<PetFinder />} />
-            {/* <Route path='contact' element={ }/> */}
+            <Route path='contact' element={<Contact />}/> 
             {/* <Route path='*' element={ }/> */}
           </Routes>
           <Footer />
