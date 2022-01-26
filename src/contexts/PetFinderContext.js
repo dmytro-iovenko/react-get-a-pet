@@ -11,60 +11,50 @@ export function PetFinderProvider(props) {
         type: ''
     });
     const [suggestions, setSuggestions] = useState([]);
-
     const [token, setToken] = useState();
+    const [searchResults, setSearchResults] = useState();
     const [isSearchStarted, setIsSearchStarted] = useState(false);
     const [isGetNextPage, setIsGetNextPage] = useState(false);
-    const [searchResults, setSearchResults] = useState();
 
+    const startSearch = () => {
+        setIsSearchStarted(true);
+    }
     useEffect(() => {
-
-        const params = Object.fromEntries(Object.entries(searchParameters).filter(([_, v]) => v && v !== ''));
-        const defaultLocation = (userLocation && 'city' in userLocation && 'state' in userLocation) ? { location: userLocation.city + ', ' + userLocation.state } : {};
-
         if (isSearchStarted) {
             if (token && token.expires_in > Date.now()) {
+                const params = Object.fromEntries(Object.entries(searchParameters).filter(([_, v]) => v && v !== ''));
+                const defaultLocation = (userLocation && 'city' in userLocation && 'state' in userLocation) ? { location: userLocation.city + ', ' + userLocation.state } : {};
+
                 getAnimals(token.access_token, 'animals', { ...defaultLocation, ...params })
                     .then(data => setSearchResults(data))
                     .finally(() => setIsSearchStarted(false));
             } else {
-                // get an access token asynchronously
                 getAccessToken()
-                    // update 'expires_in' value to the relevant timestamp
                     .then(data => ({ ...data, expires_in: Date.now() + data.expires_in * 1000 }))
                     .then(data => setToken((prev) => ({ ...prev, ...data })))
             }
         }
     }, [isSearchStarted, token])
 
-    const startSearch = () => {
-        setIsSearchStarted(true);
-    }
-
     const getNextPage = () => {
         setIsGetNextPage(true);
-        // console.log(searchResults.pagination._links.next.href)
     }
 
     useEffect(() => {
 
         if (isGetNextPage) {
             if (token && token.expires_in > Date.now()) {
-                getMoreAnimals(token.access_token, searchResults.pagination._links.next.href )
-                    .then(data => setSearchResults(prev => ({...prev, animals: [...prev.animals, ...data.animals], pagination: data.pagination})))
+                getMoreAnimals(token.access_token, searchResults.pagination._links.next.href)
+                    .then(data => setSearchResults(prev => ({ ...prev, animals: [...prev.animals, ...data.animals], pagination: data.pagination })))
                     .finally(() => setIsGetNextPage(false));
             } else {
-                // get an access token asynchronously
                 getAccessToken()
-                    // update 'expires_in' value to the relevant timestamp
                     .then(data => ({ ...data, expires_in: Date.now() + data.expires_in * 1000 }))
                     .then(data => setToken((prev) => ({ ...prev, ...data })))
             }
         }
     }, [isGetNextPage, token])
 
-
-    // update search parameters using controlled input
     const updateSearchParameters = (event) => {
         setSearchParameters((prevState) => ({
             ...prevState,
@@ -111,7 +101,7 @@ export function PetFinderProvider(props) {
     return (
         <PetFinderContext.Provider value={{
             userLocation, searchParameters, updateSearchParameters, suggestions, searchResults, startSearch,
-            animalInfo, showAnimalInfo, hideAnimalInfo, getNextPage
+            animalInfo, showAnimalInfo, hideAnimalInfo, getNextPage, isGetNextPage, isSearchStarted
         }}>
             {props.children}
         </PetFinderContext.Provider>
