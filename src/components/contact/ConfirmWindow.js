@@ -1,25 +1,24 @@
-function ConfirmWindow() {
-    return(
-        <div id="confirm" className="modal fade">
-            <div className="modal-dialog modal-confirm modal-dialog-centered modal-sm">
-                <div className="modal-content text-center">
-                    <div className="modal-header">
-                        <div className="icon-box">
-                            <i className="fas fa-check fa-4x"></i>
-                        </div>
-                        <h4 className="modal-title w-100">Thank you!</h4>
-                    </div>
-                    <div className="modal-body">
-                        <p className="text-center">Your message has been sent.</p>
-                    </div>
-                    <div className="modal-footer">
-                        <div className="d-grid">
-                            <button className="btn btn-success btn-block" data-bs-dismiss="modal">OK</button>
-                        </div>
-                    </div>
+import { Button, Modal } from 'react-bootstrap';
+
+function ConfirmWindow(props) {
+    const { show, hideConfirmation } = props;
+    return (
+        <Modal show={show} id='confirm' dialogClassName='modal-confirm' contentClassName='text-center' size='sm' centered>
+            <Modal.Header className='modal-header'>
+                <div className='icon-box'>
+                    <i className='fas fa-check fa-4x' />
                 </div>
-            </div>
-        </div>
+                <h4 className='modal-title w-100'>Thank you!</h4>
+            </Modal.Header>
+            <Modal.Body>
+                <p className='text-center'>Your message has been sent.</p>
+            </Modal.Body>
+            <Modal.Footer>
+                <div className='d-grid'>
+                    <Button variant='success' onClick={hideConfirmation}>OK</Button>
+                </div>
+            </Modal.Footer>
+        </Modal>
     );
 }
 
