@@ -40,7 +40,6 @@ function Title() {
                     </Col>
                 </Row>
             </Container>
-
         </section>
     );
 }

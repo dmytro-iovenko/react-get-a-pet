@@ -6,11 +6,11 @@ function getAxios(endPoint) {
         .then(response => response.data)
         .catch(error => console.error(error));
 }
-
+// fetch request to get locations
 export function getLocations(query, latitude, longitude) {
     return getAxios(`geography/search/?q=${query}&lat=${latitude}&lng=${longitude}`);
 }
-
+// Post request to modify the database
 function postAxios(endPoint, body, config) {
     const baseURL = 'https://api.petfinder.com/v2/';
     return axios.post(baseURL + endPoint, body, config)

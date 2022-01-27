@@ -4,7 +4,7 @@ import { Button, Col, Form } from 'react-bootstrap';
 function ContactForm(props) {
     const { showConfirmation } = props;
     const [validated, setValidated] = useState(false);
-
+    
     const [contactForm, setContactForm] = useState({
         name: '',
         email: '',
@@ -12,7 +12,7 @@ function ContactForm(props) {
         message: '',
         submitted: false
     })
-
+    //  update contact form values
     const handleChange = event => {
         setContactForm(prev => ({ ...prev, [event.target.id]: event.target.value }))
     }

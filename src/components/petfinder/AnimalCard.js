@@ -4,7 +4,6 @@ import { PetFinderContext } from '../../contexts/PetFinderContext';
 import placeholder from '../../images/card-placeholder.png'
 
 
-
 function AnimalCard(props) {
 
     const { showAnimalInfo } = useContext(PetFinderContext);

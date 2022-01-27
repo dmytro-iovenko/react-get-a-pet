@@ -10,13 +10,13 @@ function SearchResult() {
 
     // Infinite Scroll implementation based on
     // https://medium.com/suyeonme/react-how-to-implement-an-infinite-scroll-749003e9896a
-    useEffect(() => 
+    useEffect(() =>
         loader.current && new IntersectionObserver(entries => entries[0].isIntersecting && getNextPage()).observe(loader.current)
-    , [searchResults]);
+        , [searchResults]);
 
     return (
         <section id='pf-search-result'>
-            {searchResults &&
+            {searchResults ?
                 <>
                     <h2 id='pf-result-heading'>
                         We found {searchResults.pagination.total_count} pets near {location}
@@ -24,12 +24,17 @@ function SearchResult() {
                     <Row id='pf-animal-cards'>
                         {searchResults.animals.map(animal => <AnimalCard animal={animal} key={animal.id} />)}
                     </Row>
-                    {'_links' in searchResults.pagination 
-                        && 'next' in searchResults.pagination._links 
-                        && 'href' in searchResults.pagination._links.next 
-                        && <div ref={loader}/>
+                    {'_links' in searchResults.pagination
+                        && 'next' in searchResults.pagination._links
+                        && 'href' in searchResults.pagination._links.next
+                        && <div ref={loader} />
                     }
                 </>
+                :
+                <h2 id='pf-result-heading' className='text-muted'>
+                    Let's start search! <i className="fas fa-reply c-90"/>
+                </h2>
+
             }
         </section>
     );

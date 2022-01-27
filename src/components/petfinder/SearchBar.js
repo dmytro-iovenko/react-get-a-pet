@@ -7,7 +7,6 @@ function SearchBar() {
 
     return (
         <section id='pf-search'>
-
             <Container fluid>
                 <Row>
                     <Col>
