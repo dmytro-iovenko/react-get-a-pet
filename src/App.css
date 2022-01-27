@@ -158,6 +158,11 @@ h1 {
 }
 
 /* Top button */
+#top-scroll {
+    position: absolute;
+    top: 100px;
+}
+
 #top-button {
     display: none; 
     position: fixed; 

@@ -29,7 +29,7 @@ export function PetFinderProvider(props) {
     const startSearch = () => {
         setIsSearchStarted(true);
     }
-    // the function of obtaining initial data from the server according to the current search parameters
+    // function of obtaining initial data from the server according to the current search parameters
     useEffect(() => {
         // initiate data retrieval if 'isSearchStarted' state is true
         if (isSearchStarted) {
