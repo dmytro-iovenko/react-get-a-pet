@@ -1,9 +1,10 @@
 import { useContext } from 'react';
 import { Button, Col, Container, FormControl, Row } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 import { PetFinderContext } from '../../contexts/PetFinderContext';
 
 function Title() {
-    const { updateSearchParameters, searchParameters, suggestions } = useContext(PetFinderContext);
+    const { updateSearchParameters, searchParameters, suggestions, startSearch } = useContext(PetFinderContext);
 
     return (
         <section id='title'>
@@ -19,7 +20,7 @@ function Title() {
                                     type='text'
                                     className='rounded-pill'
                                     list='locationOptions'
-                                    id='search-location'
+                                    id='location'
                                     placeholder='Enter City, State or ZIP'
                                     autoComplete='off'
                                     onChange={updateSearchParameters}
@@ -31,7 +32,7 @@ function Title() {
                                         (option, index) => option.display_name !== searchParameters.location && <option value={option.display_name} key={index} />
                                     )}
                                 </datalist>
-                                <Button variant='primary' className='rounded-pill search-item' id='search-button'>
+                                <Button as={Link} to='petfinder' variant='primary' className='rounded-pill' id='search-button' onClick={startSearch}>
                                     <i className='fas fa-search' />
                                 </Button>
                             </div>

@@ -83,7 +83,7 @@ export function PetFinderProvider(props) {
     }, [isGetNextPage, token])
 
 
-    // update search parameters using controlled input
+    // update search parameters using controlled inputs
     const updateSearchParameters = (event) => {
         setSearchParameters((prevState) => ({
             ...prevState,
@@ -126,11 +126,20 @@ export function PetFinderProvider(props) {
     const hideAnimalInfo = () => {
         setAnimalInfo();
     }
+    // initialize search from home page when clicking on animal type
+    const searchByType = event => {
+        setSearchParameters({
+            location: '',
+            distance: '',
+            type: event.target.id
+        })
+        startSearch();
+    }
 
     return (
         <PetFinderContext.Provider value={{
             userLocation, searchParameters, updateSearchParameters, suggestions, searchResults, startSearch,
-            animalInfo, showAnimalInfo, hideAnimalInfo, getNextPage, isGetNextPage, isSearchStarted
+            animalInfo, showAnimalInfo, hideAnimalInfo, getNextPage, isGetNextPage, isSearchStarted, searchByType
         }}>
             {props.children}
         </PetFinderContext.Provider>

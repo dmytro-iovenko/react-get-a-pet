@@ -5,6 +5,7 @@ import ContactForm from './contact/ContactForm';
 import ContactImage from './contact/ContactImage';
 
 function Contact() {
+    // state to display the confirmation window
     const [show, setShow] = useState(false);
     const showConfirmation = () => setShow(true);
     const hideConfirmation = () => setShow(false);

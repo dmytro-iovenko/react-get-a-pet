@@ -23,7 +23,7 @@ h1 {
     padding: 1rem 2rem;
     border: none;
 }
-.search-form button {
+.search-form a.btn {
     position: absolute;
     top: 0.2rem;
     right: 0.2rem;
@@ -32,7 +32,7 @@ h1 {
     background-color: #FEA82F;
     border: none;
 }
-.search-form button:hover {
+.search-form a.btn:hover {
     background-color: #FFC288;
 } 
 .container-fluid {
@@ -89,9 +89,19 @@ h1 {
 #features li:hover {
     color: #FEA82F;
 }
+#features a {
+    text-decoration: none;
+}
+
+
 .feature-box {
     text-align: center;
     padding: 5%;
+}
+
+.search-item,
+.other-pets {
+    color: #6f787f;
 }
 .circle {
     background-color: #FCECDD;
