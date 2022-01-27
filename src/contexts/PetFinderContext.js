@@ -4,7 +4,7 @@ import { getLocations, getAccessToken, getAnimals, getMoreAnimals } from '../ser
 export const PetFinderContext = createContext();
 
 export function PetFinderProvider(props) {
-    // state to store default user location
+    // state to store the user's default location
     const [userLocation, setUserLocation] = useState();
     // state to store search parameters
     const [searchParameters, setSearchParameters] = useState({
@@ -16,24 +16,24 @@ export function PetFinderProvider(props) {
     const [suggestions, setSuggestions] = useState([]);
     // state to store a token to access Petfinder API
     const [token, setToken] = useState();
-    // state to store search results
+    // state for storing search results
     const [searchResults, setSearchResults] = useState();
     // state to store additional info about the selected animal
     const [animalInfo, setAnimalInfo] = useState();
-    // state to indicate if search is started
+    // state to indicate if the search has started
     const [isSearchStarted, setIsSearchStarted] = useState(false);
-    // state to indicate if the next page data is loaded
+    // state to indicate if the next page data has loaded
     const [isGetNextPage, setIsGetNextPage] = useState(false);
 
     // trigger search start
     const startSearch = () => {
         setIsSearchStarted(true);
     }
-    // use Effect Hook to get initial data from the server according to current search parameters
+    // the function of obtaining initial data from the server according to the current search parameters
     useEffect(() => {
-        // trigger getting data if 'isSearchStarted' state is true
+        // initiate data retrieval if 'isSearchStarted' state is true
         if (isSearchStarted) {
-            // check if token exists and does not expire
+            // check if the token exists and has not expired
             if (token && token.expires_in > Date.now()) {
                 // remove blank attributes from search parameters
                 // src: https://stackoverflow.com/a/38340730
@@ -41,41 +41,41 @@ export function PetFinderProvider(props) {
                 // initialize default location
                 const defaultLocation = (userLocation && 'city' in userLocation && 'state' in userLocation) ? { location: userLocation.city + ', ' + userLocation.state } : {};
 
-                // fetch data from server and store as search results
+                // fetch data from the server and save it as search results
                 getAnimals(token.access_token, 'animals', { ...defaultLocation, ...params })
                     .then(data => setSearchResults(data))
                     // reset 'isSearchStarted' state
                     .finally(() => setIsSearchStarted(false));
             } else {
-                // get an access token asynchronously
+                // get access token asynchronously
                 getAccessToken()
-                    // update 'expires_in' value to the relevant timestamp
+                    // update the value of 'expires_in' to the relevant timestamp
                     .then(data => ({ ...data, expires_in: Date.now() + data.expires_in * 1000 }))
                     .then(data => setToken((prev) => ({ ...prev, ...data })))
             }
         }
     }, [isSearchStarted, token])
 
-    // trigger fetching next page data
+    // trigger get next page data
     const getNextPage = () => {
         setIsGetNextPage(true);
     }
 
-    // use Effect Hook to get next page data from the server
+    // function to get next page data from the server
     useEffect(() => {
-        // trigger getting data if 'isGetNextPage' state is true
+        // initiate data retrieval if 'isGetNextPage' state is true
         if (isGetNextPage) {
-            // check if token exists and does not expire
+            // check if the token exists and has not expired
             if (token && token.expires_in > Date.now()) {
-                // fetch data from server and add it to search results
+                // fetch data from the server and add it to search results
                 getMoreAnimals(token.access_token, searchResults.pagination._links.next.href)
                     .then(data => setSearchResults(prev => ({ ...prev, animals: [...prev.animals, ...data.animals], pagination: data.pagination })))
                     // reset 'isGetNextPage' state
                     .finally(() => setIsGetNextPage(false));
             } else {
-                // get an access token asynchronously
+                // get access token asynchronously
                 getAccessToken()
-                    // update 'expires_in' value to the relevant timestamp
+                    // update the value of 'expires_in' to the relevant timestamp
                     .then(data => ({ ...data, expires_in: Date.now() + data.expires_in * 1000 }))
                     .then(data => setToken((prev) => ({ ...prev, ...data })))
             }
@@ -83,7 +83,7 @@ export function PetFinderProvider(props) {
     }, [isGetNextPage, token])
 
 
-    // update search parameters using controlled inputs
+    // update search parameters using controlled input
     const updateSearchParameters = (event) => {
         setSearchParameters((prevState) => ({
             ...prevState,
@@ -93,7 +93,7 @@ export function PetFinderProvider(props) {
 
     // get the list of location suggestions for user input
     useEffect(() => {
-        // get suggestions when input more than 2 characters
+        // get suggestions when typing more than 2 characters
         searchParameters.location.length > 2
             // fetch request to get allowed locations from PetFinder.com
             && getLocations(searchParameters.location, userLocation.latitude, userLocation.longitude)
