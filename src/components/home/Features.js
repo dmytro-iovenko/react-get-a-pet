@@ -12,7 +12,7 @@ function Features() {
         <section id='features'>
             <Row>
                 <Col lg={4} className='feature-box'>
-                    <Link to='petfinder'>
+                    <Link to='/petfinder'>
                         <div className='circle search-item' id='dog' onClick={searchByType}>
                             <i className='icon fas fa-dog fa-5x' />
                             <h2>Find a dog</h2>
@@ -20,7 +20,7 @@ function Features() {
                     </Link>
                 </Col>
                 <Col lg={4} className='feature-box'>
-                    <Link to='petfinder'>
+                    <Link to='/petfinder'>
                         <div className='circle search-item' id='cat' onClick={searchByType}>
                             <i className='icon fas fa-cat fa-5x' />
                             <h2>Find a cat</h2>
@@ -36,12 +36,12 @@ function Features() {
                             <i className='fas fa-chevron-circle-down fa-2x' />
                         </button>
                         <ul className='dropdown-menu' style={{ display: isClicked ? 'block' : 'none' }} >
-                            <Link to='petfinder'><li className='search-item' id='rabbit' onClick={searchByType}>Rabbits</li></Link>
-                            <Link to='petfinder'><li className='search-item' id='small-furry' onClick={searchByType}>Small & Furry</li></Link>
-                            <Link to='petfinder'><li className='search-item' id='horse' onClick={searchByType}>Horses</li></Link>
-                            <Link to='petfinder'><li className='search-item' id='bird' onClick={searchByType}>Birds</li></Link>
-                            <Link to='petfinder'><li className='search-item' id='scales-fins-other' onClick={searchByType}>Scales, Fins, & Other</li></Link>
-                            <Link to='petfinder'><li className='search-item' id='barnyard' onClick={searchByType}>Barnyard</li></Link>
+                            <Link to='/petfinder'><li className='search-item' id='rabbit' onClick={searchByType}>Rabbits</li></Link>
+                            <Link to='/petfinder'><li className='search-item' id='small-furry' onClick={searchByType}>Small & Furry</li></Link>
+                            <Link to='/petfinder'><li className='search-item' id='horse' onClick={searchByType}>Horses</li></Link>
+                            <Link to='/petfinder'><li className='search-item' id='bird' onClick={searchByType}>Birds</li></Link>
+                            <Link to='/petfinder'><li className='search-item' id='scales-fins-other' onClick={searchByType}>Scales, Fins, & Other</li></Link>
+                            <Link to='/petfinder'><li className='search-item' id='barnyard' onClick={searchByType}>Barnyard</li></Link>
                         </ul>
                     </div>
                 </Col>

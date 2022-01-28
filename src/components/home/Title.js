@@ -32,7 +32,7 @@ function Title() {
                                         (option, index) => option.display_name !== searchParameters.location && <option value={option.display_name} key={index} />
                                     )}
                                 </datalist>
-                                <Button as={Link} to='petfinder' variant='primary' className='rounded-pill' id='search-button' onClick={startSearch}>
+                                <Button as={Link} to='/petfinder' variant='primary' className='rounded-pill' id='search-button' onClick={startSearch}>
                                     <i className='fas fa-search' />
                                 </Button>
                             </div>

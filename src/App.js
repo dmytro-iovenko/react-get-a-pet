@@ -13,14 +13,14 @@ import NoPage from './components/NoPage';
 function App() {
   return (
     <PetFinderProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/react-get-a-pet">
         <div className="App">
           <Header />
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='home' element={<Home />} />
-            <Route path='petfinder' element={<PetFinder />} />
-            <Route path='contact' element={<Contact />}/> 
+            <Route path='/home' element={<Home />} />
+            <Route path='/petfinder' element={<PetFinder />} />
+            <Route path='/contact' element={<Contact />}/> 
             <Route path='*' element={<NoPage />} />
           </Routes>
           <Footer />

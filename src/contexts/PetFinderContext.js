@@ -131,7 +131,7 @@ export function PetFinderProvider(props) {
         setSearchParameters({
             location: '',
             distance: '',
-            type: event.target.id
+            type: event.currentTarget.id
         })
         startSearch();
     }
