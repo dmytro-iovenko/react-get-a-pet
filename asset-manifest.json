@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/react-get-a-pet/static/css/main.ef0f401d.css",
-    "main.js": "/react-get-a-pet/static/js/main.f21d5a5f.js",
+    "main.js": "/react-get-a-pet/static/js/main.2213ed8d.js",
     "static/media/logo.png": "/react-get-a-pet/static/media/logo.7eff8a69dc968438d3d5.png",
     "static/media/cute-pet-png-images.png": "/react-get-a-pet/static/media/cute-pet-png-images.66910552de4f84141885.png",
     "static/media/pet-transparent-png.png": "/react-get-a-pet/static/media/pet-transparent-png.9e70ec7431a54efe4c88.png",
     "static/media/card-placeholder.png": "/react-get-a-pet/static/media/card-placeholder.8dfd7706bdd28038a652.png",
     "index.html": "/react-get-a-pet/index.html",
     "main.ef0f401d.css.map": "/react-get-a-pet/static/css/main.ef0f401d.css.map",
-    "main.f21d5a5f.js.map": "/react-get-a-pet/static/js/main.f21d5a5f.js.map"
+    "main.2213ed8d.js.map": "/react-get-a-pet/static/js/main.2213ed8d.js.map"
   },
   "entrypoints": [
     "static/css/main.ef0f401d.css",
-    "static/js/main.f21d5a5f.js"
+    "static/js/main.2213ed8d.js"
   ]
 }
