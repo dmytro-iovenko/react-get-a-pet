@@ -70,6 +70,7 @@ h1 {
 #pets {
     background-color:#FCECDD ;
     text-align: center;
+    z-index: 1;
 }
 .pets-image {
     /* max-width: 1024px; */
@@ -149,6 +150,18 @@ h1 {
     padding: 7% 15%;
 }
 
+/* NoPage*/
+.not-found {
+    text-align: center;
+}
+.not-found h2 {
+    font-size: 7rem;
+    margin-top: 15vh;
+}
+.not-found h3 {
+    font-size: 2rem;
+}
+
 /* Footer Section*/
 
 #footer {
@@ -196,10 +209,8 @@ h1 {
 /* Pet Finder Page */
 
 /* PF Search Section */
-#pf-search-category,
-#pf-search-distance {
-    flex: none;
-    width: max-content;
+#pf-search select {
+    max-width: max-content;
 }
 
 /* PF Search Result */

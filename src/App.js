@@ -8,6 +8,7 @@ import Home from './components/Home';
 import TopButton from './components/TopButton';
 import PetFinder from './components/PetFinder';
 import Contact from './components/Contact';
+import NoPage from './components/NoPage';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
             <Route path='home' element={<Home />} />
             <Route path='petfinder' element={<PetFinder />} />
             <Route path='contact' element={<Contact />}/> 
-            {/* <Route path='*' element={ }/> */}
+            <Route path='*' element={<NoPage />} />
           </Routes>
           <Footer />
           <TopButton />
