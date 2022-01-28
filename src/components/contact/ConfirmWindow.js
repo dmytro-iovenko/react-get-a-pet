@@ -1,7 +1,11 @@
+import { useContext } from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import { ContactContext } from '../../contexts/ContactContext';
 
-function ConfirmWindow(props) {
-    const { show, hideConfirmation } = props;
+
+function ConfirmWindow() {
+    const {show, hideConfirmation} = useContext(ContactContext);
+    // const { show, hideConfirmation } = props;
     return (
         <Modal show={show} id='confirm' dialogClassName='modal-confirm' contentClassName='text-center' size='sm' centered>
             <Modal.Header className='modal-header'>

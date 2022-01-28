@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Button, Col, Form } from 'react-bootstrap';
+import { ContactContext } from '../../contexts/ContactContext';
 
-function ContactForm(props) {
-    const { showConfirmation } = props;
+function ContactForm() {
+    const { showConfirmation } = useContext(ContactContext);
     const [validated, setValidated] = useState(false);
-    
     const [contactForm, setContactForm] = useState({
         name: '',
         email: '',

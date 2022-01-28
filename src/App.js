@@ -13,8 +13,8 @@ import NoPage from './components/NoPage';
 function App() {
   return (
     <PetFinderProvider>
-      <BrowserRouter basename="/react-get-a-pet">
-        <div className="App">
+      <BrowserRouter basename='/react-get-a-pet'>
+        <div className='App'>
           <Header />
           <Routes>
             <Route path='/' element={<Home />} />
