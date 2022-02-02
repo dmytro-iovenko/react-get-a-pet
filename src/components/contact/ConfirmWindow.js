@@ -5,7 +5,6 @@ import { ContactContext } from '../../contexts/ContactContext';
 
 function ConfirmWindow() {
     const {show, hideConfirmation} = useContext(ContactContext);
-    // const { show, hideConfirmation } = props;
     return (
         <Modal show={show} id='confirm' dialogClassName='modal-confirm' contentClassName='text-center' size='sm' centered>
             <Modal.Header className='modal-header'>

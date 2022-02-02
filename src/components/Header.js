@@ -11,16 +11,16 @@ function Header() {
     return (
         <Navbar expanded={expanded} expand='lg' fixed='top' variant='light'>
             <Container fluid>
-                <Navbar.Brand as={Link} to='/' onClick={()=>setExpanded(false)}>
+                <Navbar.Brand as={Link} to='/' onClick={() => setExpanded(false)}>
                     <img src={logo} alt='logo' width='50' />
                     Get-a-Pet
                 </Navbar.Brand>
-                <Navbar.Toggle onClick={()=>setExpanded(prev=>!prev)}/>
+                <Navbar.Toggle onClick={() => setExpanded(prev => !prev)} />
                 <Navbar.Collapse id='navbarToggler'>
                     <Nav className='ms-auto'>
-                        <Nav.Link as={NavLink} to='home' onClick={()=>setExpanded(false)}>Home</Nav.Link>
-                        <Nav.Link as={NavLink} to='petfinder' onClick={()=>setExpanded(false)}>PetFinder</Nav.Link>
-                        <Nav.Link as={NavLink} to='contact' onClick={()=>setExpanded(false)}>Contact</Nav.Link>
+                        <Nav.Link as={NavLink} to='home' onClick={() => (false)}>Home</Nav.Link>
+                        <Nav.Link as={NavLink} to='petfinder' onClick={() => setExpanded(false)}>PetFinder</Nav.Link>
+                        <Nav.Link as={NavLink} to='contact' onClick={() => setExpanded(false)}>Contact</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

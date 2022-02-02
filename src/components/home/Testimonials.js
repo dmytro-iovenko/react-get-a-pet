@@ -4,7 +4,7 @@ import { getTestimonials } from '../../services/testimonials-api';
 
 function Testimonials() {
     const [data, setData] = useState();
-    // function to sort the testimonials data array in random order
+    // function to sort the testimonials data array in random order (using compare function)
     const getRandom = (array, num) => array.sort(() => 0.5 - Math.random()).slice(0, num);
     // function to update testimonials state
     useEffect(() => {
